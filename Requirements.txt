@@ -1,0 +1,9 @@
+fastapi[standard]
+sqlalchemy
+bcrypt==4.0.1
+passlib
+multipart
+pydantic
+dotenv
+python-jose
+pydantic-settings

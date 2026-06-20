@@ -1,0 +1,40 @@
+# 5. Relationship Manager (RM)
+
+### Responsibilities
+	- take the loan application in group and verify it. if it is passes then forward into Branch Manager(BM)
+
+#### Group Management
+
+* Create Group                       - [atleast 5 to 7 members include 1-head, 1-sub head, max 20 members also, group by location based on the location assign relation ship manager, amount by group, amount by every group members]
+
+
+* Edit Group			     - [add, remove , edit members, add or remove head and sub head details ]
+
+* Allocate Members to Group	     - [add members after allocate members to the group. if one member there in one group cant add in another group]
+
+* Manage Group Information  	     - [group information contains relation ship manager details,head and subhead details ]
+
+=========================================================================================================================================================
+
+#### Member Registration
+
+Capture and maintain:
+
+* Member Profile                              ----------
+* Personal Information			[dob,marry?, gender]
+* Address Information			[do no, street, area, city, pincode]
+* Identity Proof Details		[]
+* Occupation Details			[role, company, salary]
+* Contact Information			[whatsap number, second number, email, ]
+* Nominee Information			[name of the nominee, ph_no of the nomnee, relation of the nominee]
+
+==================================================================================================================================================================
+
+#### Loan Application
+
+* Create Loan Applications 
+* Submit Applications for Verification
+* Upload Required Documents
+
+
+==================================================================================================================================================================
