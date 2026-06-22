@@ -71,3 +71,16 @@ class AssignSubHeadRequest(BaseModel):
     changed_by_employee_id: int
 
     remarks: Optional[str] = None
+
+
+class GroupMemberResponse(BaseModel):
+    group_member_id: int
+
+    group_id: int
+
+    member_id: int
+
+    status: str
+
+    class Config:
+        from_attributes = True

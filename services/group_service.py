@@ -229,3 +229,19 @@ class GroupService:
         )
 
         return group
+    
+    @staticmethod
+    def get_group_members(db,group_id):
+
+        group = GroupRepository.get_by_id(db,group_id)
+
+        if not group:
+            raise HTTPException(
+                status_code=404,
+                detail="Group not found"
+            )
+
+        return GroupRepository.get_group_members(
+            db,
+            group_id
+        )

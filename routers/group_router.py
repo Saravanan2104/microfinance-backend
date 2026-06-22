@@ -14,7 +14,8 @@ from schemas.group_schema import (
     GroupResponse,
     AddMembersToGroupRequest,
     AssignHeadRequest,
-    AssignSubHeadRequest
+    AssignSubHeadRequest,
+    GroupMemberResponse
 )
 
 from services.group_service import GroupService
@@ -39,6 +40,19 @@ def create_group(
         data=payload
     )
 
+@router.get(
+    "/{group_id}/members",
+    response_model=list[GroupMemberResponse]
+)
+def get_group_members(
+    group_id: int,
+    db: Session = Depends(get_db)
+):
+
+    return GroupService.get_group_members(
+        db,
+        group_id
+    )
 
 @router.get(
     "",

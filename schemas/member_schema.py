@@ -18,7 +18,7 @@ class MemberCreate(BaseModel):
 
     email: Optional[EmailStr] = None
 
-    password: str
+    
 
 
 class MemberUpdate(BaseModel):

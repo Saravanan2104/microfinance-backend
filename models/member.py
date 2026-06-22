@@ -27,10 +27,7 @@ class Member(Base):
         nullable=False
     )
 
-    password_hash = Column(
-        String(255),
-        nullable=False
-    )
+    
 
     is_active = Column(
         Boolean,
