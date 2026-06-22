@@ -1,48 +1,70 @@
+from sqlalchemy import func
+
 from models.member import Member
 from models.group import Group
-from models.loan_application import LoanApplication
 from models.loan_account import LoanAccount
+from models.collection import Collection
+from models.repayment_schedule import (
+    RepaymentSchedule
+)
 
 
 class DashboardRepository:
 
     @staticmethod
-    def get_summary(db):
+    def get_total_members(db):
 
-        total_members = db.query(Member).count()
-
-        total_groups = db.query(Group).count()
-
-        total_loan_applications = (
-            db.query(LoanApplication).count()
+        return (
+            db.query(Member)
+            .count()
         )
 
-        active_loans = (
+    @staticmethod
+    def get_total_groups(db):
+
+        return (
+            db.query(Group)
+            .count()
+        )
+
+    @staticmethod
+    def get_active_loans(db):
+
+        return (
             db.query(LoanAccount)
             .filter(
-                LoanAccount.loan_status == "ACTIVE"
+                LoanAccount.loan_status
+                ==
+                "ACTIVE"
             )
             .count()
         )
 
-        pending_approvals = (
-            db.query(LoanApplication)
+    @staticmethod
+    def get_overdue_installments(db):
+
+        return (
+            db.query(
+                RepaymentSchedule
+            )
             .filter(
-                LoanApplication.application_status.in_(
-                    [
-                        "SUBMITTED",
-                        "RM_APPROVED",
-                        "BM_APPROVED"
-                    ]
+                RepaymentSchedule.status
+                ==
+                "OVERDUE"
+            )
+            .count()
+        )
+
+    @staticmethod
+    def get_total_collections(db):
+
+        amount = (
+            db.query(
+                func.sum(
+                    Collection.collected_amount
                 )
             )
-            .count()
+            .scalar()
         )
 
-        return {
-            "total_members": total_members,
-            "total_groups": total_groups,
-            "total_loan_applications": total_loan_applications,
-            "active_loans": active_loans,
-            "pending_approvals": pending_approvals
-        }
+        return amount or 0

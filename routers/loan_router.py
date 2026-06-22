@@ -136,10 +136,10 @@ def submit_application(
 
 
 @router.post(
-    "/{loan_application_id}/rm-approve",
+    "/{loan_application_id}/qa-approve",
     response_model=LoanApplicationResponse
 )
-def rm_approve(
+def qa_approve(
     loan_application_id: int,
     payload: LoanApprovalRequest,
     db: Session = Depends(get_db)
@@ -158,12 +158,11 @@ def rm_approve(
             detail="Loan application not found"
         )
 
-    return LoanService.rm_approve(
+    return LoanService.qa_approve(
         db,
         loan_application,
         payload
     )
-
 
 @router.post(
     "/{loan_application_id}/bm-approve",

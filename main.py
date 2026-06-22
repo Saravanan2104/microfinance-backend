@@ -39,6 +39,8 @@ from routers.loan_router import router as loan_router
 from routers.dashboard_router import router as dashboard_router
 from routers.repayment_router import router as repayment_router
 from routers.collection_router import router as collection_router
+from routers.overdue_router import router as overdue_router
+from routers.dashboard_router import router as dashboard_router
 
 
 
@@ -68,6 +70,8 @@ app.include_router(loan_router)
 app.include_router(dashboard_router)
 app.include_router(repayment_router)
 app.include_router(collection_router)
+app.include_router(overdue_router)
+app.include_router(dashboard_router)
 
 
 

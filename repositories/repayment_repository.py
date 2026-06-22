@@ -1,6 +1,5 @@
-from models.repayment_schedule import (
-    RepaymentSchedule
-)
+from models.repayment_schedule import RepaymentSchedule
+from datetime import date
 
 
 class RepaymentRepository:
@@ -37,6 +36,26 @@ class RepaymentRepository:
                 RepaymentSchedule.loan_account_id
                 ==
                 loan_account_id
+            )
+            .all()
+        )
+    
+    
+
+    @staticmethod
+    def get_overdue_installments(db):
+
+        return (
+            db.query(RepaymentSchedule)
+            .filter(
+                RepaymentSchedule.due_date < date.today(),
+
+                RepaymentSchedule.status.in_(
+                    [
+                        "PENDING",
+                        "PARTIALLY_PAID"
+                    ]
+                )
             )
             .all()
         )

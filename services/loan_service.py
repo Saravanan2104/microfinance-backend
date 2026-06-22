@@ -153,7 +153,7 @@ class LoanService:
         )
 
     @staticmethod
-    def rm_approve(
+    def qa_approve(
         db,
         loan_application,
         data
@@ -170,7 +170,7 @@ class LoanService:
             )
 
         loan_application.application_status = (
-            "RM_APPROVED"
+            "PENDING_BM_APPROVAL"
         )
 
         LoanRepository.update(
@@ -183,7 +183,7 @@ class LoanService:
                 loan_application.loan_application_id,
             approved_by_employee_id=
                 data.employee_id,
-            action_type="RM_APPROVED",
+            action_type="QA_APPROVED",
             remarks=data.remarks
         )
 
