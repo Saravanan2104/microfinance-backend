@@ -98,3 +98,31 @@ class LoanRepository:
             )
             .all()
         )
+    
+    @staticmethod
+    def get_loan_account_by_id(
+        db,
+        loan_account_id
+    ):
+        return (
+            db.query(LoanAccount)
+            .filter(
+                LoanAccount.loan_account_id
+                ==
+                loan_account_id
+            )
+            .first()
+        )
+
+
+    @staticmethod
+    def update_loan_account(
+        db,
+        loan_account
+    ):
+        db.commit()
+        db.refresh(
+            loan_account
+        )
+
+        return loan_account

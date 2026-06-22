@@ -237,3 +237,18 @@ def get_member_loans(
         db,
         member_id
     )
+
+@router.post(
+    "/loan-account/{loan_account_id}/close"
+)
+def close_loan(
+    loan_account_id: int,
+    db: Session = Depends(get_db)
+):
+
+    return (
+        LoanService.close_loan(
+            db,
+            loan_account_id
+        )
+    )

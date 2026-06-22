@@ -7,6 +7,7 @@ from models.loan_account import LoanAccount
 from repositories.loan_repository import LoanRepository
 from repositories.group_repository import GroupRepository
 from services.repayment_service import RepaymentService
+from repositories.repayment_repository import RepaymentRepository
 
 
 class LoanService:
@@ -244,6 +245,66 @@ class LoanService:
         )
 
         return loan_application
+    
+    @staticmethod
+    def close_loan(
+        db,
+        loan_account_id
+    ):
+
+        loan_account = (
+            LoanRepository
+            .get_loan_account_by_id(
+                db,
+                loan_account_id
+            )
+        )
+
+        if not loan_account:
+            raise HTTPException(
+                status_code=404,
+                detail="Loan account not found"
+            )
+
+        schedules = (
+            RepaymentRepository
+            .get_by_loan_account(
+                db,
+                loan_account_id
+            )
+        )
+
+        pending = [
+            s for s in schedules
+            if s.status != "PAID"
+        ]
+
+        if pending:
+            raise HTTPException(
+                status_code=400,
+                detail=
+                "Loan cannot be closed. Pending installments exist."
+            )
+
+        loan_account.loan_status = (
+            "CLOSED"
+        )
+
+        LoanRepository.update_loan_account(
+            db,
+            loan_account
+        )
+
+        return {
+            "loan_account_id":
+                loan_account.loan_account_id,
+
+            "loan_status":
+                loan_account.loan_status,
+
+            "message":
+                "Loan closed successfully"
+        }
 
     @staticmethod
     def admin_approve(
