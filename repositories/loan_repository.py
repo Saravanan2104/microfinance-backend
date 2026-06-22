@@ -85,3 +85,16 @@ class LoanRepository:
             )
             .first()
         )
+    
+    @staticmethod
+    def get_loans_by_member(
+        db,
+        member_id
+    ):
+        return (
+            db.query(LoanApplication)
+            .filter(
+                LoanApplication.member_id == member_id
+            )
+            .all()
+        )

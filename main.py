@@ -36,7 +36,10 @@ from models.group_role_history import GroupRoleHistory
 from routers.member_router import router as member_router
 from routers.group_router import router as group_router
 from routers.loan_router import router as loan_router
-from routers.auth_router import router as auth_router
+from routers.dashboard_router import router as dashboard_router
+from routers.repayment_router import router as repayment_router
+
+
 
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -61,7 +64,9 @@ app.add_middleware(
 app.include_router(member_router)
 app.include_router(group_router)
 app.include_router(loan_router)
-app.include_router(auth_router)
+app.include_router(dashboard_router)
+app.include_router(repayment_router)
+
 
 
 @app.get("/")

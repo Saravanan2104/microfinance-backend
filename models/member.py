@@ -25,14 +25,9 @@ class Member(Base):
         String(20),
         unique=True,
         nullable=False
-    )
+    )  
 
     
-
-    is_active = Column(
-        Boolean,
-        default=True
-    )
 
 
 

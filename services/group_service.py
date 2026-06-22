@@ -78,19 +78,6 @@ class GroupService:
                 detail="Group not found"
             )
 
-        existing_group = (
-            GroupRepository.get_member_group(
-                db,
-                member_ids
-            )
-        )
-
-        if existing_group:
-            raise HTTPException(
-                status_code=400,
-                detail="Member already belongs to a group"
-            )
-
         member_count = (
             GroupRepository.get_group_member_count(
                 db,
@@ -98,21 +85,42 @@ class GroupService:
             )
         )
 
-        if member_count >= 20:
+        if member_count + len(member_ids) > 20:
             raise HTTPException(
                 status_code=400,
                 detail="Group member limit reached"
             )
 
-        group_member = GroupMember(
-            group_id=group_id,
-            member_ids=member_ids
-        )
+        added_members = []
 
-        return GroupRepository.add_member(
-            db,
-            group_member
-        )
+        for member_id in member_ids:
+
+            existing_group = (
+                GroupRepository.get_member_group(
+                    db,
+                    member_id
+                )
+            )
+
+            if existing_group:
+                continue
+
+            group_member = GroupMember(
+                group_id=group_id,
+                member_id=member_id
+            )
+
+            GroupRepository.add_member(
+                db,
+                group_member
+            )
+
+            added_members.append(member_id)
+
+        return {
+            "message": "Members added successfully",
+            "member_ids": added_members
+        }
 
     @staticmethod
     def assign_head(

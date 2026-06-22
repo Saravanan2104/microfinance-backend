@@ -223,3 +223,17 @@ def admin_approve(
         loan_application,
         payload
     )
+
+@router.get(
+    "/member/{member_id}",
+    response_model=list[LoanApplicationResponse]
+)
+def get_member_loans(
+    member_id: int,
+    db: Session = Depends(get_db)
+):
+
+    return LoanService.get_member_loans(
+        db,
+        member_id
+    )

@@ -7,3 +7,4 @@ pydantic
 dotenv
 python-jose
 pydantic-settings
+python-dateutil==2.9.0

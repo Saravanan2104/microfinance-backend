@@ -6,6 +6,7 @@ from models.loan_account import LoanAccount
 
 from repositories.loan_repository import LoanRepository
 from repositories.group_repository import GroupRepository
+from services.repayment_service import RepaymentService
 
 
 class LoanService:
@@ -191,6 +192,16 @@ class LoanService:
         )
 
         return loan_application
+    
+    @staticmethod
+    def get_member_loans(
+        db,
+        member_id
+    ):
+        return LoanRepository.get_loans_by_member(
+            db,
+            member_id
+        )
 
     @staticmethod
     def bm_approve(
@@ -293,6 +304,11 @@ class LoanService:
         )
 
         LoanRepository.create_loan_account(
+            db,
+            loan_account
+        )
+
+        RepaymentService.generate_schedule(
             db,
             loan_account
         )

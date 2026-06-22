@@ -8,9 +8,11 @@ class MemberService:
     @staticmethod
     def create_member(db, data):
 
-        member_count = len(
-            MemberRepository.get_all(db)
-        ) + 1
+        member_count = (
+            len(
+                MemberRepository.get_all(db)
+            ) + 1
+        )
 
         member_code = f"MBR{member_count:06d}"
 
@@ -19,20 +21,13 @@ class MemberService:
 
             first_name=data.first_name,
             last_name=data.last_name,
-
             dob=data.dob,
             gender=data.gender,
             marital_status=data.marital_status,
-
             phone=data.phone,
             whatsapp_number=data.whatsapp_number,
             secondary_number=data.secondary_number,
-
-            email=data.email,
-
-            password_hash=data.password,
-
-            is_active=True
+            email=data.email
         )
 
         return MemberRepository.create(

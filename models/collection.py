@@ -3,12 +3,9 @@ from sqlalchemy import (
     Integer,
     Float,
     String,
-    DateTime,
+    Date,
     ForeignKey
 )
-
-from sqlalchemy.orm import relationship
-from datetime import datetime
 
 from database.base import Base
 
@@ -22,44 +19,53 @@ class Collection(Base):
         index=True
     )
 
-    group_id = Column(
+    loan_account_id = Column(
         Integer,
-        ForeignKey("groups.group_id"),
+        ForeignKey("loan_accounts.loan_account_id"),
         nullable=False
     )
 
-    collected_by_member_id = Column(
+    repayment_schedule_id = Column(
         Integer,
-        ForeignKey("members.member_id")
+        ForeignKey(
+            "repayment_schedules.repayment_schedule_id"
+        ),
+        nullable=False
     )
 
-    received_by_employee_id = Column(
+    member_id = Column(
         Integer,
-        ForeignKey("employees.employee_id")
+        ForeignKey("members.member_id"),
+        nullable=False
     )
 
     collection_date = Column(
-        DateTime,
-        default=datetime.utcnow
+        Date,
+        nullable=False
     )
 
-    total_collected_amount = Column(
+    collected_amount = Column(
         Float,
-        default=0
+        nullable=False
+    )
+
+    collection_mode = Column(
+        String(50),
+        nullable=False
+    )
+
+    receipt_number = Column(
+        String(50),
+        unique=True,
+        nullable=False
     )
 
     remarks = Column(
         String(500)
     )
 
-    group = relationship("Group")
-
-    collector = relationship(
-        "Member",
-        foreign_keys=[collected_by_member_id]
-    )
-
-    receiver = relationship(
-        "Employee",
-        foreign_keys=[received_by_employee_id]
+    collected_by_employee_id = Column(
+        Integer,
+        ForeignKey("employees.employee_id"),
+        nullable=False
     )
