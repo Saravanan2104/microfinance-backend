@@ -41,6 +41,9 @@ from routers.repayment_router import router as repayment_router
 from routers.collection_router import router as collection_router
 from routers.overdue_router import router as overdue_router
 from routers.dashboard_router import router as dashboard_router
+from routers.report_router import router as report_router
+from routers.employee_router import router as employee_router
+from routers.role_router import router as role_router
 
 
 
@@ -64,13 +67,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(role_router)
+#app.include_router(branch_router)
+#app.include_router(location_router)
+app.include_router(employee_router)
 app.include_router(member_router)
 app.include_router(group_router)
 app.include_router(loan_router)
-app.include_router(dashboard_router)
-app.include_router(repayment_router)
 app.include_router(collection_router)
-app.include_router(overdue_router)
+app.include_router(report_router)
 app.include_router(dashboard_router)
 
 
