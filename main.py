@@ -44,6 +44,7 @@ from routers.dashboard_router import router as dashboard_router
 from routers.report_router import router as report_router
 from routers.employee_router import router as employee_router
 from routers.role_router import router as role_router
+from routers.auth_router import router as auth_router
 
 
 
@@ -77,6 +78,7 @@ app.include_router(loan_router)
 app.include_router(collection_router)
 app.include_router(report_router)
 app.include_router(dashboard_router)
+app.include_router(auth_router)
 
 
 
