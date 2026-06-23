@@ -16,9 +16,7 @@ class GroupService:
             group_code=data.group_code,
             group_name=data.group_name,
             branch_id=data.branch_id,
-            location_id=data.location_id,
-            relationship_manager_employee_id=
-                data.relationship_manager_employee_id,
+            location_id=data.location_id,            
             group_limit_amount=data.group_limit_amount
         )
 

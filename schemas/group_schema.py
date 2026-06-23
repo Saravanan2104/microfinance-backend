@@ -10,7 +10,7 @@ class GroupCreate(BaseModel):
     branch_id: int
     location_id: int
 
-    relationship_manager_employee_id: int
+    
 
     group_limit_amount: float
 
@@ -21,7 +21,7 @@ class GroupUpdate(BaseModel):
     branch_id: Optional[int] = None
     location_id: Optional[int] = None
 
-    relationship_manager_employee_id: Optional[int] = None
+    
 
     group_limit_amount: Optional[float] = None
 

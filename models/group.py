@@ -43,12 +43,7 @@ class Group(Base):
         nullable=False
     )
 
-    relationship_manager_employee_id = Column(
-        Integer,
-        ForeignKey("employees.employee_id"),
-        nullable=False
-    )
-
+    
     head_member_id = Column(
         Integer,
         ForeignKey("members.member_id")
