@@ -45,6 +45,9 @@ from routers.report_router import router as report_router
 from routers.employee_router import router as employee_router
 from routers.role_router import router as role_router
 from routers.auth_router import router as auth_router
+from routers.group_assignment_router import router as group_assignment_router
+
+
 
 
 
@@ -79,6 +82,7 @@ app.include_router(collection_router)
 app.include_router(report_router)
 app.include_router(dashboard_router)
 app.include_router(auth_router)
+app.include_router(group_assignment_router)
 
 
 

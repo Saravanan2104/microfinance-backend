@@ -26,3 +26,9 @@ def create_role(
     db.refresh(role)
 
     return role
+
+@router.get("")
+def get_roles(
+    db: Session = Depends(get_db)
+):
+    return db.query(Role).all()

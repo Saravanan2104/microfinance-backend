@@ -48,3 +48,7 @@ class EmployeeRepository:
         db.commit()
         db.refresh(employee)
         return employee
+    
+    @staticmethod
+    def get_all_employees(db):
+        return db.query(Employee).all()

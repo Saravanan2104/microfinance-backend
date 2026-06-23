@@ -16,6 +16,8 @@ class EmployeeService:
         db,
         data
     ):
+        
+        
 
         role = (
             EmployeeRepository.get_role_by_name(
@@ -121,3 +123,7 @@ class EmployeeService:
             "message":
                 "Employee created successfully"
         }
+    
+    @staticmethod
+    def get_all_employees(db):
+        return EmployeeRepository.get_all_employees(db)
