@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 
+from seed import seed_data
+
 from database.base import Base
 from database.connection import engine
 
@@ -54,8 +56,18 @@ from routers.group_assignment_router import router as group_assignment_router
 from fastapi.middleware.cors import CORSMiddleware
 
 
-
+# Table creation
 Base.metadata.create_all(bind=engine)
+
+from database.dependencies import (
+    SessionLocal
+)
+
+db = SessionLocal()
+
+seed_data(db)
+
+db.close()
 
 
 
@@ -70,6 +82,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+# Routers
 
 app.include_router(role_router)
 #app.include_router(branch_router)
