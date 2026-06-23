@@ -66,9 +66,7 @@ class Group(Base):
 
     branch = relationship("Branch")
     location = relationship("Location")
-    relationship_manager = relationship(
-        "Employee"
-    )
+    
 
     head_member = relationship(
         "Member",
