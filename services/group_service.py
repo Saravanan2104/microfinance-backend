@@ -4,6 +4,9 @@ from models.group import Group
 from models.group_member import GroupMember
 from models.group_role_history import GroupRoleHistory
 from models.branch import Branch
+from models.user import User
+from models.employee import Employee
+from models.branch_assignment import BranchAssignment
 
 from repositories.group_repository import GroupRepository
 
@@ -11,7 +14,7 @@ from repositories.group_repository import GroupRepository
 class GroupService:
 
     @staticmethod
-    def create_group(db, data):
+    def create_group(db, data,current_user):
 
         group_count = (
             GroupRepository.get_group_count(db)
@@ -22,24 +25,49 @@ class GroupService:
             f"GRP{group_count:06d}"
         )
 
-        branch = (
-            db.query(Branch)
+        user = (
+            db.query(User)
             .filter(
-                Branch.branch_id == data.branch_id
+                User.username == current_user["sub"]
             )
             .first()
         )
 
-        if not branch:
+        employee = (
+            db.query(Employee)
+            .filter(
+                Employee.user_id == user.user_id
+            )
+            .first()
+        )
+
+        assignment = (
+            db.query(BranchAssignment)
+            .filter(
+                BranchAssignment.employee_id == employee.employee_id,
+                BranchAssignment.status == "ACTIVE"
+            )
+            .first()
+        )
+
+        if not assignment:
             raise HTTPException(
                 status_code=404,
-                detail="Branch not found"
+                detail="Branch not assigned"
             )
+
+        branch = (
+            db.query(Branch)
+            .filter(
+                Branch.branch_id == assignment.branch_id
+            )
+            .first()
+        )
 
         group = Group(
             group_code=group_code,
             group_name=data.group_name,
-            branch_id=data.branch_id,
+            branch_id=branch.branch_id,
             group_limit_amount=data.group_limit_amount
         )
 

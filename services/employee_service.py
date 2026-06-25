@@ -91,13 +91,7 @@ class EmployeeService:
                 data.email,
 
             phone=
-                data.phone,
-
-            branch_id=
-                data.branch_id,
-
-            location_id=
-                data.location_id
+                data.phone
         )
 
         created_employee = (

@@ -4,8 +4,6 @@ from enum import Enum
 
 
 class EmployeeRole(str, Enum):
-    ADMIN = "ADMIN"
-    BM = "BM"
     RM = "RM"
     QA = "QA"
 
@@ -22,8 +20,4 @@ class EmployeeCreate(BaseModel):
 
     email: EmailStr
 
-    phone: str
-
-    branch_id: Optional[int] = None
-
-    location_id: Optional[int] = None
+    phone: str    

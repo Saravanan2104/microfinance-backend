@@ -8,6 +8,8 @@ from sqlalchemy.orm import Session
 
 from database.dependencies import get_db
 
+from core.auth import get_current_user
+
 from schemas.group_schema import (
     GroupCreate,
     GroupUpdate,
@@ -33,12 +35,17 @@ router = APIRouter(
 )
 def create_group(
     payload: GroupCreate,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user)
 ):
+
     return GroupService.create_group(
         db=db,
-        data=payload
+        data=payload,
+        current_user=current_user
     )
+
+    
 
 @router.get(
     "/{group_id}/members",
