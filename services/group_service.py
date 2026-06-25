@@ -38,13 +38,8 @@ class GroupService:
 
         group = Group(
             group_code=group_code,
-
             group_name=data.group_name,
-
             branch_id=data.branch_id,
-
-            location_id=branch.location_id,
-
             group_limit_amount=data.group_limit_amount
         )
 

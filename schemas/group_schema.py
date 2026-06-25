@@ -12,8 +12,7 @@ class GroupCreate(BaseModel):
 class GroupUpdate(BaseModel):
     group_name: Optional[str] = None
 
-    branch_id: Optional[int] = None
-    location_id: Optional[int] = None
+    branch_id: Optional[int] = None  
 
     
 
@@ -29,7 +28,7 @@ class GroupResponse(BaseModel):
     group_name: str
 
     branch_id: int
-    location_id: int   
+     
 
     head_member_id: Optional[int]
     sub_head_member_id: Optional[int]

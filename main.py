@@ -48,6 +48,7 @@ from routers.employee_router import router as employee_router
 from routers.role_router import router as role_router
 from routers.auth_router import router as auth_router
 from routers.group_assignment_router import router as group_assignment_router
+from routers.branch_router import router as branch_router
 
 
 
@@ -87,7 +88,7 @@ app.add_middleware(
 # Routers
 
 app.include_router(role_router)
-#app.include_router(branch_router)
+app.include_router(branch_router)
 #app.include_router(location_router)
 app.include_router(employee_router)
 app.include_router(member_router)

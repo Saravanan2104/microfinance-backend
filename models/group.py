@@ -35,13 +35,7 @@ class Group(Base):
         Integer,
         ForeignKey("branches.branch_id"),
         nullable=False
-    )
-
-    location_id = Column(
-        Integer,
-        ForeignKey("locations.location_id"),
-        nullable=False
-    )
+    )   
 
     
     head_member_id = Column(
@@ -65,7 +59,7 @@ class Group(Base):
     )
 
     branch = relationship("Branch")
-    location = relationship("Location")
+    
     
 
     head_member = relationship(
