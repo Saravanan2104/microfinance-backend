@@ -14,7 +14,8 @@ class EmployeeService:
     @staticmethod
     def create_employee(
         db,
-        data
+        data,
+        current_user
     ):
         
         

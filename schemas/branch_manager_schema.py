@@ -12,23 +12,3 @@ class BranchManagerCreate(BaseModel):
     email: EmailStr
 
     phone: str
-
-
-class BranchManagerResponse(BaseModel):
-
-    employee_id: int
-
-    employee_code: str
-
-    username: str
-
-    first_name: str
-
-    last_name: str
-
-    email: str
-
-    phone: str
-
-    class Config:
-        from_attributes = True

@@ -50,6 +50,7 @@ from routers.auth_router import router as auth_router
 from routers.group_assignment_router import router as group_assignment_router
 from routers.branch_router import router as branch_router
 from routers.branch_assignment_router import router as branch_assignment_router
+from routers.branch_manager_router import router as branch_manager_router
 
 
 
@@ -101,6 +102,7 @@ app.include_router(dashboard_router)
 app.include_router(auth_router)
 app.include_router(group_assignment_router)
 app.include_router(branch_assignment_router)
+app.include_router(branch_manager_router)
 
 
 

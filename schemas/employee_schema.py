@@ -6,6 +6,7 @@ from enum import Enum
 class EmployeeRole(str, Enum):
     RM = "RM"
     QA = "QA"
+    BM = "BM"
 
 
 class EmployeeCreate(BaseModel):
@@ -20,4 +21,6 @@ class EmployeeCreate(BaseModel):
 
     email: EmailStr
 
-    phone: str    
+    phone: str
+
+  
