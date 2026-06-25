@@ -4,14 +4,8 @@ from pydantic import BaseModel
 
 
 class GroupCreate(BaseModel):
-    group_code: str
     group_name: str
-
-    branch_id: int
-    location_id: int
-
-    
-
+    branch_id: int 
     group_limit_amount: float
 
 
@@ -35,9 +29,7 @@ class GroupResponse(BaseModel):
     group_name: str
 
     branch_id: int
-    location_id: int
-
-    relationship_manager_employee_id: int
+    location_id: int   
 
     head_member_id: Optional[int]
     sub_head_member_id: Optional[int]

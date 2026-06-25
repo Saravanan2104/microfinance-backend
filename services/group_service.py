@@ -3,6 +3,7 @@ from fastapi import HTTPException
 from models.group import Group
 from models.group_member import GroupMember
 from models.group_role_history import GroupRoleHistory
+from models.branch import Branch
 
 from repositories.group_repository import GroupRepository
 
@@ -12,11 +13,38 @@ class GroupService:
     @staticmethod
     def create_group(db, data):
 
+        group_count = (
+            GroupRepository.get_group_count(db)
+            + 1
+        )
+
+        group_code = (
+            f"GRP{group_count:06d}"
+        )
+
+        branch = (
+            db.query(Branch)
+            .filter(
+                Branch.branch_id == data.branch_id
+            )
+            .first()
+        )
+
+        if not branch:
+            raise HTTPException(
+                status_code=404,
+                detail="Branch not found"
+            )
+
         group = Group(
-            group_code=data.group_code,
+            group_code=group_code,
+
             group_name=data.group_name,
+
             branch_id=data.branch_id,
-            location_id=data.location_id,            
+
+            location_id=branch.location_id,
+
             group_limit_amount=data.group_limit_amount
         )
 

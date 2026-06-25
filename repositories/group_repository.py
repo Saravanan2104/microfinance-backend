@@ -81,3 +81,7 @@ class GroupRepository:
     @staticmethod
     def get_group_members(db,group_id):
         return (db.query(GroupMember).filter(GroupMember.group_id == group_id,GroupMember.status == "ACTIVE") .all())
+    
+    @staticmethod
+    def get_group_count(db):
+        return db.query(Group).count()
