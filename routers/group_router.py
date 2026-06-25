@@ -36,16 +36,16 @@ router = APIRouter(
 def create_group(
     payload: GroupCreate,
     db: Session = Depends(get_db),
-    current_user=Depends(get_current_user)
+    #current_user=Depends(get_current_user)
 ):
 
     return GroupService.create_group(
         db=db,
         data=payload,
-        current_user=current_user
+        #current_user=current_user
     )
 
-    
+
 
 @router.get(
     "/{group_id}/members",
