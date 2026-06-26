@@ -27,6 +27,12 @@ class EmployeeService:
             )
         )
 
+        if data.role_name not in ["RM", "QA"]:
+            raise HTTPException(
+                status_code=403,
+                detail="Branch Manager can create only RM and QA"
+            )
+
         if not role:
             raise HTTPException(
                 status_code=404,

@@ -85,3 +85,16 @@ class GroupRepository:
     @staticmethod
     def get_group_count(db):
         return db.query(Group).count()
+    
+    @staticmethod
+    def get_groups_by_ids(
+        db,
+        group_ids
+    ):
+        return (
+            db.query(Group)
+            .filter(
+                Group.group_id.in_(group_ids)
+            )
+            .all()
+        )
