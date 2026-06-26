@@ -24,10 +24,8 @@ class MemberService:
             dob=data.dob,
             gender=data.gender,
             marital_status=data.marital_status,
-            phone=data.phone,
-            whatsapp_number=data.whatsapp_number,
-            secondary_number=data.secondary_number,
-            email=data.email
+            phone=data.phone,            
+            secondary_number=data.secondary_number
         )
 
         return MemberRepository.create(

@@ -15,11 +15,9 @@ class Member(Base):
 
     marital_status = Column(String(20),nullable=True)
 
-    phone = Column(String(20),unique=True,nullable=False)
-    whatsapp_number = Column(String(20),nullable=True)
-    secondary_number = Column(String(20), nullable=True)
+    phone = Column(String(20),unique=True,nullable=False)    
+    secondary_number = Column(String(20), nullable=True)    
     
-    email = Column(String(255),unique=True,nullable=True)
 
     member_code = Column(
         String(20),
